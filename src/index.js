@@ -3,14 +3,19 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
-import firebaseConfig from '../src/components/Config/firebase'
-import{
-    FirebaseAppProvider
-} from 'reactfire';
+import { createStore } from 'redux'; //Add Redux
+import rootReducer from './store/reducers/rootreducer'
+import { Provider } from 'react-redux'
+import firebaseConfig from '../src/config/firebase'
+import { FirebaseAppProvider } from 'reactfire';
+
+const store = createStore(rootReducer);
 
 ReactDOM.render((
 <FirebaseAppProvider firebaseConfig={firebaseConfig}>
-    <App />
+    <Provider store={store}>
+        <App />
+    </Provider>
 </FirebaseAppProvider>
 
 ), document.getElementById('root'));
